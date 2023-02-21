@@ -2,7 +2,7 @@ import fs from 'fs';
 import chalk from 'chalk';
 
 function controlError (error) {
-     throw new Error (error);
+     throw new Error (chalk.red(error.code, 'Missing file or directory'));
 }
 
 function getFile (filePath) {
