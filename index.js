@@ -7,9 +7,13 @@ function controlError (error) {
 }
 
 async function getFile (filePath) {
-     const encoding = 'UTF-8';
-     const text = await fs.promises.readFile(filePath, encoding)
-     console.log(chalk.green(text));
+     try {
+          const encoding = 'UTF-8';
+          const text = await fs.promises.readFile(filePath, encoding)
+          console.log(chalk.green(text));
+     } catch (error) {
+          controlError(error);
+     }
 }
 
 // function getFile (filePath) {
