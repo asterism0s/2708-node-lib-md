@@ -2,17 +2,23 @@ import fs from 'fs';
 import chalk from 'chalk';
 
 function controlError (error) {
+     console.log(error);
      throw new Error (chalk.red(error.code, 'Missing file or directory'));
 }
 
-function getFile (filePath) {
+async function getFile (filePath) {
      const encoding = 'UTF-8';
-     fs.readFile(filePath, encoding, (error, text) => {
-          if (error) {
-               controlError (error);
-          }
-          console.log (chalk.green(text));
-     })
+     const text = await fs.promises.readFile(filePath, encoding)
+     console.log(chalk.green(text));
 }
+
+// function getFile (filePath) {
+//      const encoding = 'UTF-8';
+//      fs.promises
+//      .readFile(filePath, encoding)
+//      .then((text) => console.log(chalk.green(text)))
+//      .catch(controlError);
+// }
+
 
 getFile ('./arquivos/texto.md');
